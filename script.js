@@ -10,35 +10,35 @@
 // "multi" colors (just Picasso Mix) render as a speckled gradient instead of
 // one flat color, since that's a mixed-color bead in real life.
 const BEAD_COLORS = [
-  { name: 'Crystal Clear',   hex: '#F1E9DC', x: 0,  y: 0,     w: 25, h: 16.67 },
-  { name: 'Champagne',       hex: '#EAD6BC', x: 25, y: 0,     w: 25, h: 16.67 },
-  { name: 'Light Topaz',     hex: '#CB8E52', x: 50, y: 0,     w: 25, h: 16.67 },
-  { name: 'Ruby Red',        hex: '#CC2436', x: 75, y: 0,     w: 25, h: 16.67 },
-  { name: 'Garnet',          hex: '#7E2222', x: 0,  y: 16.67, w: 25, h: 16.67 },
-  { name: 'Cocoa Brown',     hex: '#5E3826', x: 25, y: 16.67, w: 25, h: 16.67 },
-  { name: 'Tangerine',       hex: '#E3591E', x: 50, y: 16.67, w: 25, h: 16.67 },
-  { name: 'Honey Gold',      hex: '#E29A34', x: 75, y: 16.67, w: 25, h: 16.67 },
-  { name: 'Marigold',        hex: '#CC7620', x: 0,  y: 33.33, w: 25, h: 16.67 },
-  { name: 'Sunshine Yellow', hex: '#EBBC3E', x: 25, y: 33.33, w: 25, h: 16.67 },
-  { name: 'Chartreuse',      hex: '#BCCB45', x: 50, y: 33.33, w: 25, h: 16.67 },
-  { name: 'Grass Green',     hex: '#5F8030', x: 75, y: 33.33, w: 25, h: 16.67 },
-  { name: 'Forest Green',    hex: '#234223', x: 0,  y: 50,    w: 25, h: 16.67 },
-  { name: 'Emerald',         hex: '#2F6E40', x: 25, y: 50,    w: 25, h: 16.67 },
+  { name: 'Crystal Clear',   hex: '#F7F2EA', x: 0,  y: 0,     w: 25, h: 16.67 },
+  { name: 'Champagne',       hex: '#F2E6D7', x: 25, y: 0,     w: 25, h: 16.67 },
+  { name: 'Light Topaz',     hex: '#E0BB97', x: 50, y: 0,     w: 25, h: 16.67 },
+  { name: 'Ruby Red',        hex: '#E07C86', x: 75, y: 0,     w: 25, h: 16.67 },
+  { name: 'Garnet',          hex: '#B27A7A', x: 0,  y: 16.67, w: 25, h: 16.67 },
+  { name: 'Cocoa Brown',     hex: '#9E887D', x: 25, y: 16.67, w: 25, h: 16.67 },
+  { name: 'Tangerine',       hex: '#EE9B78', x: 50, y: 16.67, w: 25, h: 16.67 },
+  { name: 'Honey Gold',      hex: '#EEC285', x: 75, y: 16.67, w: 25, h: 16.67 },
+  { name: 'Marigold',        hex: '#E0AD79', x: 0,  y: 33.33, w: 25, h: 16.67 },
+  { name: 'Sunshine Yellow', hex: '#F3D78B', x: 25, y: 33.33, w: 25, h: 16.67 },
+  { name: 'Chartreuse',      hex: '#D7E08F', x: 50, y: 33.33, w: 25, h: 16.67 },
+  { name: 'Grass Green',     hex: '#9FB383', x: 75, y: 33.33, w: 25, h: 16.67 },
+  { name: 'Forest Green',    hex: '#7B8E7B', x: 0,  y: 50,    w: 25, h: 16.67 },
+  { name: 'Emerald',         hex: '#82A88C', x: 25, y: 50,    w: 25, h: 16.67 },
   {
     name: 'Picasso Mix', x: 50, y: 50, w: 25, h: 16.67,
-    hex: '#8A7355', // fallback solid color (used for aria-labels / plain contexts)
+    hex: '#B7A98F', // fallback solid color (used for aria-labels / plain contexts)
     multi: true,
-    stops: ['#4A3419', '#7C8F4A', '#B5451B', '#D9B23C', '#5A7A8C', '#4A3419'],
+    stops: ['#8A7050', '#A8B888', '#D18868', '#E8CB80', '#93AEB8', '#8A7050'],
   },
-  { name: 'Teal',            hex: '#1F7686', x: 75, y: 50,    w: 25, h: 16.67 },
-  { name: 'Aqua',            hex: '#3E76B0', x: 0,  y: 66.67, w: 25, h: 16.67 },
-  { name: 'Sky Blue',        hex: '#4E97BE', x: 25, y: 66.67, w: 25, h: 16.67 },
-  { name: 'Periwinkle',      hex: '#7C7BB0', x: 50, y: 66.67, w: 25, h: 16.67 },
-  { name: 'Ice Blue',        hex: '#D3DEE7', x: 75, y: 66.67, w: 25, h: 16.67 },
-  { name: 'Turquoise',       hex: '#5FADBC', x: 0,  y: 83.33, w: 25, h: 16.67 },
-  { name: 'Navy Indigo',     hex: '#312A68', x: 25, y: 83.33, w: 25, h: 16.67 },
-  { name: 'Deep Plum',       hex: '#512E3D', x: 50, y: 83.33, w: 25, h: 16.67 },
-  { name: 'Root Beer',       hex: '#7E5240', x: 75, y: 83.33, w: 25, h: 16.67 },
+  { name: 'Teal',            hex: '#79ADB6', x: 75, y: 50,    w: 25, h: 16.67 },
+  { name: 'Aqua',            hex: '#8BADD0', x: 0,  y: 66.67, w: 25, h: 16.67 },
+  { name: 'Sky Blue',        hex: '#95C1D8', x: 25, y: 66.67, w: 25, h: 16.67 },
+  { name: 'Periwinkle',      hex: '#B0B0D0', x: 50, y: 66.67, w: 25, h: 16.67 },
+  { name: 'Ice Blue',        hex: '#E5EBF1', x: 75, y: 66.67, w: 25, h: 16.67 },
+  { name: 'Turquoise',       hex: '#9FCED7', x: 0,  y: 83.33, w: 25, h: 16.67 },
+  { name: 'Navy Indigo',     hex: '#837FA4', x: 25, y: 83.33, w: 25, h: 16.67 },
+  { name: 'Deep Plum',       hex: '#97828B', x: 50, y: 83.33, w: 25, h: 16.67 },
+  { name: 'Root Beer',       hex: '#B2978C', x: 75, y: 83.33, w: 25, h: 16.67 },
 ];
 
 // -------- Front wing bead layout, row by row, top to bottom --------
@@ -61,11 +61,17 @@ const WING_ROW_COUNT = WING_ROWS.length;
 let selectedIndex = null; // index into BEAD_COLORS, or null
 const cellFills = {}; // "r_c" -> index into BEAD_COLORS
 
-// Returns a CSS background value (solid color, or a gradient for multi-color beads)
+// Returns a CSS background value (solid color, or a hard-edged striped
+// gradient for multi-color "Picasso mix" style beads, so it reads as
+// distinct flecks of color rather than a smooth blend).
 function cssBackgroundFor(index) {
   const c = BEAD_COLORS[index];
   if (!c) return '';
-  return c.multi ? `linear-gradient(135deg, ${c.stops.join(', ')})` : c.hex;
+  if (!c.multi) return c.hex;
+  const n = c.stops.length;
+  const stepPct = 100 / n;
+  const parts = c.stops.map((stop, i) => `${stop} ${i * stepPct}%, ${stop} ${(i + 1) * stepPct}%`);
+  return `linear-gradient(135deg, ${parts.join(', ')})`;
 }
 
 // ============================================
@@ -130,6 +136,14 @@ function engineRev(duration, delay) {
   } catch (e) { /* audio not available, fail silently */ }
 }
 
+// A quick "throttle blip" idle — three short rising engine pulses, like an
+// F1 car blipping its throttle on the grid before lights out. Used at the
+// very start of the loading screen so it reads clearly as an engine, not
+// just a beep.
+function playEngineIdleBlips() {
+  [0, 0.3, 0.6].forEach((delay) => engineRev(0.24, delay));
+}
+
 function playPickSound() { beep(520, 0.08, 'square', 0); }
 function playPaintSound() { beep(340, 0.05, 'triangle', 0); }
 
@@ -150,7 +164,7 @@ function runLoadingScreen() {
   const text = document.getElementById('loading-text');
   const sub = document.getElementById('loading-sub');
 
-  engineRev(1.1, 0); // engine turning over as the screen appears
+  playEngineIdleBlips(); // engine blipping as the screen appears
 
   const steps = ['GET READY', '3', '2', '1', 'GO!'];
   let i = 0;
@@ -159,7 +173,7 @@ function runLoadingScreen() {
     const isGo = i === steps.length - 1;
     sub.textContent = isGo ? 'lights out and away we go' : 'starting your grid';
     if (isGo) {
-      engineRev(0.8, 0);
+      engineRev(1.1, 0);
     } else {
       beep(300, 0.12, 'square', 0);
     }
@@ -245,6 +259,18 @@ function buildCarGrid() {
 
     rowEl.appendChild(cellsEl);
     grid.appendChild(rowEl);
+  });
+
+  // Explicitly measure the widest row and lock the grid to that width, then
+  // center every row's content within it. This sidesteps browser flexbox
+  // auto-sizing quirks that were leaving rows left-aligned instead of
+  // centered as a pyramid.
+  requestAnimationFrame(() => {
+    let maxWidth = 0;
+    grid.querySelectorAll('.wing-row').forEach((row) => {
+      maxWidth = Math.max(maxWidth, row.scrollWidth);
+    });
+    if (maxWidth > 0) grid.style.width = maxWidth + 'px';
   });
 }
 
@@ -346,7 +372,11 @@ function fillBeadCell(ctx, x, y, size, colorIndex) {
   if (c && c.multi) {
     const grad = ctx.createLinearGradient(x, y, x + size, y + size);
     const n = c.stops.length;
-    c.stops.forEach((stop, i) => grad.addColorStop(i / (n - 1), stop));
+    const step = 1 / n;
+    c.stops.forEach((stop, i) => {
+      grad.addColorStop(Math.min(i * step, 1), stop);
+      grad.addColorStop(Math.min((i + 1) * step, 1), stop);
+    });
     ctx.fillStyle = grad;
   } else {
     ctx.fillStyle = c ? c.hex : '#EFE6D6';

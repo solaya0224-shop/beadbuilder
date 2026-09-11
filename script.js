@@ -2,33 +2,43 @@
    swallowbirdcircle — bead customizer
    ============================================ */
 
-// -------- Bead colors, sampled from the shop's actual bead tray photo --------
+// -------- Bead colors, based on the shop's actual bead tray photo --------
 // x / y / w / h are percentages of the palette image, matching the 4-column x 6-row tray.
+// Hex values are brightness/white-balance corrected from the raw photo sample
+// (the photo was shot under warm indoor light, which skewed everything dark
+// and brown) so they read closer to the true bead color on screen.
+// "multi" colors (just Picasso Mix) render as a speckled gradient instead of
+// one flat color, since that's a mixed-color bead in real life.
 const BEAD_COLORS = [
-  { name: 'Crystal Clear',    hex: '#CAAD92', x: 0,  y: 0,     w: 25, h: 16.67 },
-  { name: 'Champagne',        hex: '#D2A382', x: 25, y: 0,     w: 25, h: 16.67 },
-  { name: 'Light Topaz',      hex: '#AB5F36', x: 50, y: 0,     w: 25, h: 16.67 },
-  { name: 'Ruby Red',         hex: '#970E18', x: 75, y: 0,     w: 25, h: 16.67 },
-  { name: 'Garnet',           hex: '#611010', x: 0,  y: 16.67, w: 25, h: 16.67 },
-  { name: 'Cocoa Brown',      hex: '#3D1A11', x: 25, y: 16.67, w: 25, h: 16.67 },
-  { name: 'Tangerine',        hex: '#C63513', x: 50, y: 16.67, w: 25, h: 16.67 },
-  { name: 'Honey Gold',       hex: '#D07A2A', x: 75, y: 16.67, w: 25, h: 16.67 },
-  { name: 'Marigold',         hex: '#9A491A', x: 0,  y: 33.33, w: 25, h: 16.67 },
-  { name: 'Sunshine Yellow',  hex: '#D28D1A', x: 25, y: 33.33, w: 25, h: 16.67 },
-  { name: 'Chartreuse',       hex: '#928A1F', x: 50, y: 33.33, w: 25, h: 16.67 },
-  { name: 'Grass Green',      hex: '#374D1A', x: 75, y: 33.33, w: 25, h: 16.67 },
-  { name: 'Forest Green',     hex: '#161811', x: 0,  y: 50,    w: 25, h: 16.67 },
-  { name: 'Emerald',          hex: '#1B2613', x: 25, y: 50,    w: 25, h: 16.67 },
-  { name: 'Picasso Mix',      hex: '#3D2B18', x: 50, y: 50,    w: 25, h: 16.67 },
-  { name: 'Teal',             hex: '#143039', x: 75, y: 50,    w: 25, h: 16.67 },
-  { name: 'Aqua',             hex: '#1D3C65', x: 0,  y: 66.67, w: 25, h: 16.67 },
-  { name: 'Sky Blue',         hex: '#306888', x: 25, y: 66.67, w: 25, h: 16.67 },
-  { name: 'Periwinkle',       hex: '#3C3B5D', x: 50, y: 66.67, w: 25, h: 16.67 },
-  { name: 'Ice Blue',         hex: '#807A88', x: 75, y: 66.67, w: 25, h: 16.67 },
-  { name: 'Turquoise',        hex: '#4C7D92', x: 0,  y: 83.33, w: 25, h: 16.67 },
-  { name: 'Navy Indigo',      hex: '#1D1838', x: 25, y: 83.33, w: 25, h: 16.67 },
-  { name: 'Deep Plum',        hex: '#26181B', x: 50, y: 83.33, w: 25, h: 16.67 },
-  { name: 'Root Beer',        hex: '#633735', x: 75, y: 83.33, w: 25, h: 16.67 },
+  { name: 'Crystal Clear',   hex: '#F1E9DC', x: 0,  y: 0,     w: 25, h: 16.67 },
+  { name: 'Champagne',       hex: '#EAD6BC', x: 25, y: 0,     w: 25, h: 16.67 },
+  { name: 'Light Topaz',     hex: '#CB8E52', x: 50, y: 0,     w: 25, h: 16.67 },
+  { name: 'Ruby Red',        hex: '#CC2436', x: 75, y: 0,     w: 25, h: 16.67 },
+  { name: 'Garnet',          hex: '#7E2222', x: 0,  y: 16.67, w: 25, h: 16.67 },
+  { name: 'Cocoa Brown',     hex: '#5E3826', x: 25, y: 16.67, w: 25, h: 16.67 },
+  { name: 'Tangerine',       hex: '#E3591E', x: 50, y: 16.67, w: 25, h: 16.67 },
+  { name: 'Honey Gold',      hex: '#E29A34', x: 75, y: 16.67, w: 25, h: 16.67 },
+  { name: 'Marigold',        hex: '#CC7620', x: 0,  y: 33.33, w: 25, h: 16.67 },
+  { name: 'Sunshine Yellow', hex: '#EBBC3E', x: 25, y: 33.33, w: 25, h: 16.67 },
+  { name: 'Chartreuse',      hex: '#BCCB45', x: 50, y: 33.33, w: 25, h: 16.67 },
+  { name: 'Grass Green',     hex: '#5F8030', x: 75, y: 33.33, w: 25, h: 16.67 },
+  { name: 'Forest Green',    hex: '#234223', x: 0,  y: 50,    w: 25, h: 16.67 },
+  { name: 'Emerald',         hex: '#2F6E40', x: 25, y: 50,    w: 25, h: 16.67 },
+  {
+    name: 'Picasso Mix', x: 50, y: 50, w: 25, h: 16.67,
+    hex: '#8A7355', // fallback solid color (used for aria-labels / plain contexts)
+    multi: true,
+    stops: ['#4A3419', '#7C8F4A', '#B5451B', '#D9B23C', '#5A7A8C', '#4A3419'],
+  },
+  { name: 'Teal',            hex: '#1F7686', x: 75, y: 50,    w: 25, h: 16.67 },
+  { name: 'Aqua',            hex: '#3E76B0', x: 0,  y: 66.67, w: 25, h: 16.67 },
+  { name: 'Sky Blue',        hex: '#4E97BE', x: 25, y: 66.67, w: 25, h: 16.67 },
+  { name: 'Periwinkle',      hex: '#7C7BB0', x: 50, y: 66.67, w: 25, h: 16.67 },
+  { name: 'Ice Blue',        hex: '#D3DEE7', x: 75, y: 66.67, w: 25, h: 16.67 },
+  { name: 'Turquoise',       hex: '#5FADBC', x: 0,  y: 83.33, w: 25, h: 16.67 },
+  { name: 'Navy Indigo',     hex: '#312A68', x: 25, y: 83.33, w: 25, h: 16.67 },
+  { name: 'Deep Plum',       hex: '#512E3D', x: 50, y: 83.33, w: 25, h: 16.67 },
+  { name: 'Root Beer',       hex: '#7E5240', x: 75, y: 83.33, w: 25, h: 16.67 },
 ];
 
 // -------- Front wing bead layout, row by row, top to bottom --------
@@ -48,40 +58,91 @@ const WING_ROWS = [
 ];
 const WING_ROW_COUNT = WING_ROWS.length;
 
-let selectedHex = null;
-const cellFills = {}; // "r_c" -> hex
+let selectedIndex = null; // index into BEAD_COLORS, or null
+const cellFills = {}; // "r_c" -> index into BEAD_COLORS
+
+// Returns a CSS background value (solid color, or a gradient for multi-color beads)
+function cssBackgroundFor(index) {
+  const c = BEAD_COLORS[index];
+  if (!c) return '';
+  return c.multi ? `linear-gradient(135deg, ${c.stops.join(', ')})` : c.hex;
+}
 
 // ============================================
-// Tiny sound engine (no audio files, just oscillators)
+// Sound engine (no audio files — everything is synthesized)
 // ============================================
 let audioCtx = null;
 function getAudioCtx() {
   if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   return audioCtx;
 }
-function beep(freq, duration, type, delay) {
+
+function beep(freq, duration, type, delay, volume) {
   try {
     const ctx = getAudioCtx();
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = type || 'square';
     osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.06, ctx.currentTime + (delay || 0));
-    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + (delay || 0) + duration);
+    const startAt = ctx.currentTime + (delay || 0);
+    gain.gain.setValueAtTime(volume || 0.06, startAt);
+    gain.gain.exponentialRampToValueAtTime(0.001, startAt + duration);
     osc.connect(gain);
     gain.connect(ctx.destination);
-    osc.start(ctx.currentTime + (delay || 0));
-    osc.stop(ctx.currentTime + (delay || 0) + duration);
+    osc.start(startAt);
+    osc.stop(startAt + duration + 0.02);
   } catch (e) { /* audio not available, fail silently */ }
 }
+
+// A short engine "rev" — a sawtooth sweep, layered with a lower rumble
+// oscillator underneath for more body.
+function engineRev(duration, delay) {
+  try {
+    const ctx = getAudioCtx();
+    const startAt = ctx.currentTime + (delay || 0);
+
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'sawtooth';
+    osc.frequency.setValueAtTime(90, startAt);
+    osc.frequency.exponentialRampToValueAtTime(360, startAt + duration * 0.55);
+    osc.frequency.exponentialRampToValueAtTime(200, startAt + duration);
+    gain.gain.setValueAtTime(0.0001, startAt);
+    gain.gain.exponentialRampToValueAtTime(0.09, startAt + duration * 0.15);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(startAt);
+    osc.stop(startAt + duration + 0.05);
+
+    const rumble = ctx.createOscillator();
+    const rumbleGain = ctx.createGain();
+    rumble.type = 'square';
+    rumble.frequency.setValueAtTime(45, startAt);
+    rumble.frequency.exponentialRampToValueAtTime(120, startAt + duration * 0.55);
+    rumbleGain.gain.setValueAtTime(0.0001, startAt);
+    rumbleGain.gain.exponentialRampToValueAtTime(0.05, startAt + duration * 0.15);
+    rumbleGain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+    rumble.connect(rumbleGain);
+    rumbleGain.connect(ctx.destination);
+    rumble.start(startAt);
+    rumble.stop(startAt + duration + 0.05);
+  } catch (e) { /* audio not available, fail silently */ }
+}
+
 function playPickSound() { beep(520, 0.08, 'square', 0); }
 function playPaintSound() { beep(340, 0.05, 'triangle', 0); }
-function playSuccessFanfare() {
-  [440, 554, 659, 880].forEach((f, i) => beep(f, 0.18, 'square', i * 0.1));
+
+// A short original victory riff (no borrowed melodies) plus an engine
+// flourish underneath, for the "I'm done!" moment.
+function playVictoryFanfare() {
+  const notes = [523.25, 659.25, 783.99, 1046.5, 783.99, 1046.5, 1318.5];
+  notes.forEach((f, i) => beep(f, 0.16, 'square', i * 0.11, 0.055));
+  engineRev(0.9, 0.05);
 }
 
 // ============================================
-// Loading screen: quick "lights out" countdown
+// Loading screen: "lights out" countdown with engine sound
 // ============================================
 function runLoadingScreen() {
   const screen = document.getElementById('loading-screen');
@@ -89,12 +150,19 @@ function runLoadingScreen() {
   const text = document.getElementById('loading-text');
   const sub = document.getElementById('loading-sub');
 
+  engineRev(1.1, 0); // engine turning over as the screen appears
+
   const steps = ['GET READY', '3', '2', '1', 'GO!'];
   let i = 0;
   const interval = setInterval(() => {
     text.textContent = steps[i];
-    sub.textContent = i === steps.length - 1 ? 'lights out and away we go' : 'starting your grid';
-    beep(i === steps.length - 1 ? 660 : 300, 0.12, 'square', 0);
+    const isGo = i === steps.length - 1;
+    sub.textContent = isGo ? 'lights out and away we go' : 'starting your grid';
+    if (isGo) {
+      engineRev(0.8, 0);
+    } else {
+      beep(300, 0.12, 'square', 0);
+    }
     i++;
     if (i >= steps.length) {
       clearInterval(interval);
@@ -104,9 +172,9 @@ function runLoadingScreen() {
           screen.classList.add('hidden');
           site.classList.remove('hidden');
         }, 400);
-      }, 350);
+      }, 450);
     }
-  }, 380);
+  }, 420);
 }
 
 // ============================================
@@ -114,7 +182,7 @@ function runLoadingScreen() {
 // ============================================
 function buildHotspots() {
   const wrap = document.getElementById('hotspots');
-  BEAD_COLORS.forEach((c) => {
+  BEAD_COLORS.forEach((c, index) => {
     const btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'hotspot';
@@ -123,13 +191,14 @@ function buildHotspots() {
     btn.style.width = c.w + '%';
     btn.style.height = c.h + '%';
     btn.setAttribute('aria-label', 'Select ' + c.name);
-    btn.addEventListener('click', () => selectColor(c, btn));
+    btn.addEventListener('click', () => selectColor(index, btn));
     wrap.appendChild(btn);
   });
 }
 
-function selectColor(c, btnEl) {
-  selectedHex = c.hex;
+function selectColor(index, btnEl) {
+  selectedIndex = index;
+  const c = BEAD_COLORS[index];
   playPickSound();
 
   document.querySelectorAll('.hotspot.picked').forEach((el) => el.classList.remove('picked'));
@@ -137,7 +206,7 @@ function selectColor(c, btnEl) {
   setTimeout(() => btnEl.classList.remove('picked'), 500);
 
   const swatch = document.getElementById('selectedSwirl');
-  swatch.style.background = c.hex;
+  swatch.style.background = cssBackgroundFor(index);
   swatch.classList.remove('pop');
   void swatch.offsetWidth; // restart animation
   swatch.classList.add('pop');
@@ -196,12 +265,12 @@ function makeFillableCell(r, c) {
   const key = r + '_' + c;
   cell.setAttribute('aria-label', 'Bead cell, row ' + (r + 1));
   cell.addEventListener('click', () => {
-    if (!selectedHex) {
+    if (selectedIndex === null) {
       document.getElementById('selectedName').textContent = 'Pick a color first!';
       return;
     }
-    cellFills[key] = selectedHex;
-    cell.style.background = selectedHex;
+    cellFills[key] = selectedIndex;
+    cell.style.background = cssBackgroundFor(selectedIndex);
     playPaintSound();
   });
   return cell;
@@ -216,18 +285,14 @@ function clearGrid() {
 // for fun / inspiration — customers can still click cells afterward to
 // change individual beads.
 function randomizeColors() {
-  WING_ROWS.forEach((rowSpec, r) => {
-    for (let c = 0; c < rowSpec.count; c++) {
-      const randomColor = BEAD_COLORS[Math.floor(Math.random() * BEAD_COLORS.length)];
-      cellFills[r + '_' + c] = randomColor.hex;
-    }
-  });
   const cells = document.querySelectorAll('#carGrid .cell.fillable');
   let idx = 0;
   WING_ROWS.forEach((rowSpec, r) => {
     for (let c = 0; c < rowSpec.count; c++) {
+      const randomIndex = Math.floor(Math.random() * BEAD_COLORS.length);
       const key = r + '_' + c;
-      cells[idx].style.background = cellFills[key];
+      cellFills[key] = randomIndex;
+      cells[idx].style.background = cssBackgroundFor(randomIndex);
       idx++;
     }
   });
@@ -249,7 +314,6 @@ function renderDesignToCanvas() {
   ctx.fillStyle = '#FFFDF8';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.font = '16px monospace';
-  ctx.fillStyle = '#4A4744';
   ctx.textBaseline = 'middle';
 
   WING_ROWS.forEach((rowSpec, r) => {
@@ -267,11 +331,7 @@ function renderDesignToCanvas() {
     for (let c = 0; c < rowSpec.count; c++) {
       const key = r + '_' + c;
       const x = labelWidth + colCursor * (size + gap);
-      ctx.fillStyle = cellFills[key] || '#EFE6D6';
-      ctx.fillRect(x, y, size, size);
-      ctx.strokeStyle = '#1B1B1B';
-      ctx.lineWidth = 1;
-      ctx.strokeRect(x, y, size, size);
+      fillBeadCell(ctx, x, y, size, cellFills[key]);
       colCursor++;
     }
     if (hasWheels) {
@@ -279,6 +339,22 @@ function renderDesignToCanvas() {
     }
   });
   return canvas;
+}
+
+function fillBeadCell(ctx, x, y, size, colorIndex) {
+  const c = BEAD_COLORS[colorIndex];
+  if (c && c.multi) {
+    const grad = ctx.createLinearGradient(x, y, x + size, y + size);
+    const n = c.stops.length;
+    c.stops.forEach((stop, i) => grad.addColorStop(i / (n - 1), stop));
+    ctx.fillStyle = grad;
+  } else {
+    ctx.fillStyle = c ? c.hex : '#EFE6D6';
+  }
+  ctx.fillRect(x, y, size, size);
+  ctx.strokeStyle = '#1B1B1B';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(x, y, size, size);
 }
 
 function drawWheelCell(ctx, x, y, size) {
@@ -294,7 +370,7 @@ function drawWheelCell(ctx, x, y, size) {
 function downloadDesign() {
   const canvas = renderDesignToCanvas();
   const link = document.createElement('a');
-  link.download = 'my-swallowbirdcircle-race-car.png';
+  link.download = 'my-swallowbirdcircle-front-wing.png';
   link.href = canvas.toDataURL();
   link.click();
 }
@@ -309,7 +385,7 @@ function launchConfetti() {
   canvas.height = canvas.offsetHeight;
 
   const colors = ['#C8102E', '#F1641E', '#FFFDF8', '#1B1B1B'];
-  const pieces = Array.from({ length: 120 }, () => ({
+  const pieces = Array.from({ length: 130 }, () => ({
     x: Math.random() * canvas.width,
     y: -20 - Math.random() * canvas.height * 0.5,
     size: 5 + Math.random() * 6,
@@ -357,7 +433,7 @@ function openSuccessOverlay() {
   }
   const overlay = document.getElementById('successOverlay');
   overlay.classList.remove('hidden');
-  playSuccessFanfare();
+  playVictoryFanfare();
   launchConfetti();
 }
 

@@ -288,16 +288,20 @@ button {
    count label and fixed grey wheel beads)
    ============================================ */
 .wing-grid {
-  display: inline-flex;
+  display: flex;
   flex-direction: column;
   gap: 7px;
-  align-items: center;
+  margin: 0 auto;
+  /* width is set explicitly by script.js to match the widest row, so every
+     row below can be centered underneath it reliably */
 }
 
 .wing-row {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: .7rem;
+  width: 100%;
 }
 
 .row-label {

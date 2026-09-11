@@ -1,0 +1,506 @@
+/* ============================================
+   swallowbirdcircle — design tokens
+   ============================================ */
+:root {
+  --flag-white: #FFFDF8;
+  --flag-black: #1B1B1B;
+  --racing-red: #C8102E;
+  --brand-orange: #F1641E;
+  --cream: #FBF3E7;
+  --track-grey: #4A4744;
+  --line: #E4D9C7;
+  --radius: 10px;
+
+  --font-display: 'Bitcount Grid Double', 'Courier New', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--flag-black);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.hidden { display: none !important; }
+
+img { max-width: 100%; display: block; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ============================================
+   Loading screen
+   ============================================ */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: var(--flag-black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  transition: opacity .5s ease;
+}
+
+.loading-flag {
+  width: 120px;
+  height: 120px;
+  border: 3px solid var(--flag-white);
+  overflow: hidden;
+  animation: flag-wave 1.1s ease-in-out infinite;
+}
+
+.flag-grid {
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(45deg, var(--flag-black) 25%, transparent 25%, transparent 75%, var(--flag-black) 75%),
+    linear-gradient(45deg, var(--flag-black) 25%, transparent 25%, transparent 75%, var(--flag-black) 75%);
+  background-color: var(--flag-white);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+@keyframes flag-wave {
+  0%, 100% { transform: skewY(0deg); }
+  50% { transform: skewY(-3deg); }
+}
+
+#loading-text {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  color: var(--flag-white);
+  letter-spacing: .08em;
+  margin: 0;
+}
+
+#loading-sub {
+  color: var(--racing-red);
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.site-header {
+  text-align: center;
+  padding: 2.5rem 1.5rem 1.5rem;
+}
+
+.logo-badge {
+  width: 84px;
+  height: 84px;
+  margin: 0 auto .75rem;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 3px solid var(--racing-red);
+}
+
+.site-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 6vw, 3rem);
+  margin: 0;
+  letter-spacing: .03em;
+}
+
+.site-subtitle {
+  margin: .35rem 0 0;
+  color: var(--track-grey);
+  font-size: .95rem;
+}
+
+/* ============================================
+   Checkered marquee banner
+   ============================================ */
+.marquee {
+  background:
+    repeating-conic-gradient(var(--flag-white) 0% 25%, var(--racing-red) 0% 50%) 0 0 / 44px 44px;
+  border-top: 3px solid var(--flag-black);
+  border-bottom: 3px solid var(--flag-black);
+  overflow: hidden;
+  padding: .6rem 0;
+}
+
+.marquee__track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 48s linear infinite;
+}
+
+.marquee__item {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--flag-white);
+  background: var(--flag-black);
+  padding: .35rem 1.5rem;
+  margin: 0 .5rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  letter-spacing: .04em;
+}
+
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track { animation: none; }
+}
+
+/* ============================================
+   Intro + designer layout
+   ============================================ */
+.intro {
+  max-width: 620px;
+  margin: 2rem auto 0;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.intro p {
+  font-size: 1.05rem;
+  color: var(--track-grey);
+}
+
+.designer {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  align-items: start;
+}
+
+@media (max-width: 800px) {
+  .designer { grid-template-columns: 1fr; }
+}
+
+.panel {
+  background: var(--flag-white);
+  border: 2px solid var(--flag-black);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 5px 5px 0 var(--racing-red);
+}
+
+.panel__step {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin: 0 0 1rem;
+}
+
+/* ============================================
+   Palette photo + hotspots
+   ============================================ */
+.palette-wrap {
+  position: relative;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 2px solid var(--line);
+}
+
+.hotspots {
+  position: absolute;
+  inset: 0;
+}
+
+.hotspot {
+  position: absolute;
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+
+.hotspot:hover,
+.hotspot:focus-visible {
+  outline: 3px solid var(--flag-white);
+  outline-offset: -3px;
+  box-shadow: inset 0 0 0 3px var(--flag-black);
+}
+
+.hotspot.picked::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 3px solid var(--flag-white);
+  box-shadow: inset 0 0 0 3px var(--flag-black);
+  animation: pick-pulse .5s ease;
+}
+
+@keyframes pick-pulse {
+  0% { transform: scale(.6); opacity: 0; }
+  60% { transform: scale(1.08); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.selected-color {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-top: 1rem;
+  padding: .6rem .8rem;
+  background: var(--cream);
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.selected-color__swatch {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 2px solid var(--flag-black);
+  background: var(--flag-white);
+  transition: background .15s ease, transform .15s ease;
+}
+
+.selected-color__swatch.pop {
+  animation: swatch-pop .35s ease;
+}
+
+@keyframes swatch-pop {
+  0% { transform: scale(.7) rotate(-8deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+#selectedName {
+  font-size: .95rem;
+  color: var(--track-grey);
+}
+
+/* ============================================
+   Front wing bead grid (row by row, with a bead
+   count label and fixed grey wheel beads)
+   ============================================ */
+.wing-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-start;
+  margin: 0 auto;
+}
+
+.wing-row {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.row-label {
+  font-family: var(--font-display);
+  font-size: .95rem;
+  width: 3.4rem;
+  flex: 0 0 auto;
+  text-align: right;
+  color: var(--track-grey);
+}
+
+.row-cells {
+  display: flex;
+  gap: 3px;
+}
+
+.cell {
+  width: clamp(20px, 5.4vw, 30px);
+  height: clamp(20px, 5.4vw, 30px);
+  border-radius: 4px;
+  padding: 0;
+}
+
+.cell.fillable {
+  background: var(--cream);
+  border: 1px solid var(--line);
+}
+
+.cell.fillable:hover {
+  border-color: var(--flag-black);
+}
+
+.cell.wheel {
+  background: repeating-conic-gradient(var(--flag-black) 0% 25%, #6b6b6b 0% 50%) 0 0 / 60% 60%;
+  border: 1px solid var(--flag-black);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.controls {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  padding: .65rem 1.4rem;
+  border-radius: 8px;
+  border: 2px solid var(--flag-black);
+  letter-spacing: .03em;
+}
+
+.btn--primary {
+  background: var(--racing-red);
+  color: var(--flag-white);
+}
+
+.btn--primary:hover { background: var(--brand-orange); }
+
+.btn--ghost {
+  background: var(--flag-white);
+  color: var(--flag-black);
+}
+
+.btn--ghost:hover { background: var(--cream); }
+
+.btn--randomize {
+  display: block;
+  width: 100%;
+  margin-top: .85rem;
+  font-size: .9rem;
+  padding: .55rem 1rem;
+}
+
+/* ============================================
+   Success overlay + confetti
+   ============================================ */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  background: rgba(27,27,27,.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+#confettiCanvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.success-box {
+  position: relative;
+  background: var(--flag-white);
+  border: 3px solid var(--flag-black);
+  border-radius: var(--radius);
+  max-width: 420px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 6px 6px 0 var(--brand-orange);
+}
+
+.success-box h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  margin-top: 0;
+}
+
+.success-box ol {
+  text-align: left;
+  font-size: .95rem;
+  color: var(--track-grey);
+}
+
+.success-box__actions {
+  display: flex;
+  gap: .75rem;
+  justify-content: center;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.site-footer {
+  text-align: center;
+  padding: 2.5rem 1.5rem 3rem;
+  border-top: 3px solid var(--flag-black);
+  background: var(--flag-white);
+}
+
+.footer-tagline {
+  max-width: 480px;
+  margin: 0 auto 1.5rem;
+  color: var(--track-grey);
+  font-style: italic;
+}
+
+.socials {
+  display: flex;
+  gap: 1.25rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.social-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .3rem;
+  color: var(--flag-black);
+  text-decoration: none;
+  font-size: .75rem;
+  cursor: pointer;
+}
+
+.social-icon svg {
+  width: 46px;
+  height: 46px;
+  padding: 11px;
+  border-radius: 50%;
+  border: 2px solid var(--flag-black);
+  transition: transform .2s ease, background .2s ease, color .2s ease;
+}
+
+.social-icon span {
+  font-size: .85rem;
+}
+
+.social-icon:hover svg,
+.social-icon:focus-visible svg {
+  background: var(--racing-red);
+  color: var(--flag-white);
+}
+
+.social-icon.launching svg {
+  animation: icon-launch .5s ease;
+}
+
+@keyframes icon-launch {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.3) rotate(-8deg); }
+  100% { transform: scale(1) translateY(-40px); opacity: 0; }
+}
+
+.footer-fineprint {
+  font-size: .8rem;
+  color: var(--track-grey);
+  margin: 0;
+}
+
+/* Accessible focus visibility everywhere */
+:focus-visible {
+  outline: 3px solid var(--brand-orange);
+  outline-offset: 2px;
+}

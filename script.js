@@ -348,7 +348,9 @@ function renderDesignToCanvas() {
     ctx.fillText(rowSpec.label, 4, y + size / 2);
 
     const hasWheels = rowSpec.wheels >= 2;
-    let colCursor = 0;
+    const rowWidthCells = rowSpec.count + rowSpec.wheels;
+    const startOffset = Math.floor((maxRowWidth - rowWidthCells) / 2);
+    let colCursor = startOffset;
 
     if (hasWheels) {
       drawWheelCell(ctx, labelWidth + colCursor * (size + gap), y, size);

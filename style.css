@@ -190,6 +190,20 @@ button {
   .designer { grid-template-columns: 1fr; }
 }
 
+.grid-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.picker-panel .panel__step {
+  margin-bottom: .85rem;
+}
+
+.picker-panel .selected-color {
+  margin-top: 0;
+}
+
 .panel {
   background: var(--flag-white);
   border: 2px solid var(--flag-black);
